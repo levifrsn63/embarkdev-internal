@@ -327,6 +327,8 @@
                 configurable:{regex: /configurable:\sfalse,/g, patch: 'configurable: true,'},
                 typeError: {regex: /throw new TypeError/g, patch: "console.error"},
                 error: { regex: /throw new Error/g, patch: "console.error" },
+                antiRebrand: { regex: /function\s+\u00EE\u00EE\u00ED\u00EC\u00ED\u00EC\(\)\s*\{[\s\S]*?return\s+\u00EE\u00EE\u00ED\u00EC\u00ED\u00EC\(\);\s*\}/g, patch: 'function _noopRebrand() { return []; }' },
+                antiRebrand2: { regex: /\(function\s*\(\u00EC\u00EF\u00ED\u00EC\u00EC\u00E9,\s*\u00ED\u00ED\u00EF\u00EF\u00EC\u00EC\)\s*\{[\s\S]*?\}\(\u00EC\u00EE\u00ED\u00EC\u00EC\u00E9,\s*0x73677\)[\s\S]*?\}\(window\)\);/g, patch: '(function(){}(window));' },
             };
             for (const name in entries) {
                 const object = entries[name]; const found = object.regex.exec(script);
