@@ -299,7 +299,7 @@
                     for (const node of mutation.addedNodes) {
                         if (node.tagName === 'SCRIPT' && node.src && node.src.includes('/static/index-')) {
                             node.remove(); observer.disconnect();
-                            this.gameJS = downloadFileSync(`https://cdn.jsdelivr.net/gh/levifrsn63/embarkdev-internal@${GM_info.script.version}/GameSource/game.js`);
+                            this.gameJS = downloadFileSync(`https://cdn.jsdelivr.net/gh/levifrsn63/embarkdev-internal@main/GameSource/game.js`);
                             const patchedScript = this.patchGameScript(this.gameJS);
                             this.gameVersion = /let\s+[^\s=]+\s*=\s*['"]([0-9]+\.[0-9]+\.[0-9]+)['"]\s*;\s*let\s+[^\s=]+\s*=\s*[^\s=]+\s*\+\s*['"][^'"]+['"]\s*;\s*let\s+[^\s=]+\s*=\s*process\.env\.CUSTOM_VERSION/s.exec(this.gameJS)[1];
                             window.addEventListener('load', () => { Function(patchedScript)(); });
